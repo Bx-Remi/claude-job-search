@@ -1,0 +1,10 @@
+{
+  "name": "claude-job-search",
+  "description": "A two-track job-search and interview-prep system for Claude Code. Logs every pipeline event (applied, heard back, interview, rejected, offer) into a Notion Opportunities database and a Todoist action layer from one sentence of plain English, and scaffolds first-round interview prep from your calendar, email, CV, and a quick web snapshot. Ships a duplicatable Notion template and a STAR-story template. Requires the Notion and Todoist MCP connectors (Gmail / Calendar / Drive optional).",
+  "author": {
+    "name": "Rémi Bertieaux"
+  },
+  "version": "1.0.0",
+  "homepage": "https://github.com/Bx-Remi/claude-job-search",
+  "license": "MIT"
+}

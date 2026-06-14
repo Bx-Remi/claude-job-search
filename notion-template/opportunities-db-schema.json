@@ -1,0 +1,25 @@
+{
+  "title": "Opportunities",
+  "description": "Job-search pipeline. One row per (Company + Role). The sole source of truth; Todoist holds action tasks only.",
+  "notes": "SELECT option strings are emoji-prefixed and must match EXACTLY — the skills (and the Notion API) reject unrecognised values. Build this database from this schema (have Claude do it) or duplicate the published Notion template; do not hand-type the options.",
+  "properties": {
+    "Company":      { "type": "title" },
+    "Role":         { "type": "rich_text" },
+    "Status":       { "type": "select", "options": ["🔍 Sourcing", "📨 Applied", "📞 Recruiter screen", "👤 Hiring manager", "📝 Take-home", "🎯 Final stage", "💌 Offer", "🎉 Offer accepted", "⚰️ Dead"] },
+    "Excitement":   { "type": "select", "options": ["5 ⭐⭐⭐⭐⭐", "4 ⭐⭐⭐⭐", "3 ⭐⭐⭐", "2 ⭐⭐", "1 ⭐"] },
+    "Track":        { "type": "select", "options": ["🅰️ A", "🅱️ B"] },
+    "Temperature":  { "type": "select", "options": ["🔥 Hot", "☀️ Warm", "❄️ Cool"] },
+    "Source":       { "type": "select", "options": ["LinkedIn", "Reed", "Adzuna", "Otta", "Referral", "Direct", "Other"] },
+    "Link":         { "type": "url" },
+    "Salary range": { "type": "rich_text" },
+    "Work model":   { "type": "select", "options": ["🏠 Remote", "🔀 Hybrid 1d", "🔀 Hybrid 2d", "🔀 Hybrid 3d", "🔀 Hybrid 4d", "🔀 Hybrid TBD", "🏢 Onsite"] },
+    "Location":     { "type": "rich_text" },
+    "Applied date": { "type": "date" },
+    "Last contact": { "type": "date" },
+    "Next action":  { "type": "rich_text" },
+    "Next action date": { "type": "date" },
+    "Days since last contact": { "type": "formula", "expression": "dateBetween(now(), prop(\"Last contact\"), \"days\")" },
+    "Dead reason":  { "type": "select", "options": ["Rejected", "Ghosted", "Withdrew", "Role closed", "Not a fit", "Other"] },
+    "Notes":        { "type": "rich_text" }
+  }
+}

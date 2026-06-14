@@ -1,0 +1,15 @@
+# Personal config — never commit your own IDs
+config.local.md
+*.local.md
+*.local
+
+# Skill runtime output
+output/
+.skipped-roles.jsonl
+
+# OS / editor / env
+.DS_Store
+.env
+node_modules/
+.idea/
+.vscode/
