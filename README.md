@@ -33,7 +33,8 @@ letting Claude do the work for you.
 
 4. **Follow Claude's lead.** It walks you through the whole thing and only stops to ask when it needs
    *you* — basically a couple of quick sign-ins to **Notion** and **Todoist** (two free apps) in your
-   browser. Everything else it handles itself.
+   browser. Everything else it handles itself. (Those sign-ins happen in your browser the normal way —
+   you're never asked to paste any passwords or keys, and you never have to edit a settings file.)
 5. **When it's done, Claude explains how the system works**, and you can start using it — just tell it
    things like *"I applied to Acme for a Support Lead role"* or *"prep me for my Contoso interview."*
 

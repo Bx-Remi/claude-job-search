@@ -78,14 +78,28 @@ Ask whether they already have **Notion** and **Todoist** accounts.
 Explain first, in one sentence: *"A connector is a secure bridge that lets me use your Notion and
 Todoist with your own login — you approve it in your browser, and I never see your password."*
 
-Then walk them through connecting each one **inside Claude Code**:
-- Open the connectors view (run **`/mcp`** in the Claude Code prompt, or use the connectors panel in
-  the Claude Code app), choose **Add / Connect**, pick **Notion**, and a browser window opens — sign
-  in and click **Approve / Allow**.
-- Repeat for **Todoist**.
-- *(Optional)* Repeat for **Gmail**, **Google Calendar**, **Google Drive** if they want richer prep.
+Then walk them through connecting each one. The path depends on whether they're in the **desktop
+app** or the **terminal (CLI)** — figure out which they're using and give them the matching steps:
+
+**Desktop app (easiest):** click the **+** button next to the message box → **Connectors** → find
+**Notion** in the list (it's there by name) → click it → a browser window opens → sign in to Notion
+and click **Allow**. Then do exactly the same for **Todoist**.
+
+**Terminal / CLI:** run **`/mcp`** to add and authenticate a connector. If they need the official
+server addresses, they are:
+- Notion: `claude mcp add --transport http notion https://mcp.notion.com/mcp`
+- Todoist: `claude mcp add --transport http todoist https://ai.todoist.net/mcp`
+Then run `/mcp` and authenticate — a browser opens for each.
+
+*(Optional)* Same flow for **Gmail / Google Calendar / Google Drive** if they want richer prep.
 
 **Required:** Notion + Todoist. Optional: the Google three.
+
+**Credential safety — tell them this plainly:** the official connectors sign you in through your
+browser (the same as logging into Notion or Todoist normally), and you'll **never be asked to paste
+an API key, token, or password** — not into the chat, not into a file. If any setup tells you to
+paste a token, it's an unofficial third-party server; don't use it. Stick to the named connector in
+the app, or the two official URLs above.
 
 Then **verify before moving on**. After they say a connector is done, actually call one of its tools
 to confirm it works:
