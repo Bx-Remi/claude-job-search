@@ -13,6 +13,36 @@ sharing the genericized version here so you can adapt it.
 
 ---
 
+## Get started — one prompt, about 15 minutes
+
+**New to Claude Code? You don't need to understand any of this.** You set it up once, mostly by
+letting Claude do the work for you.
+
+1. **Install Claude Code** — download it from [claude.com/claude-code](https://claude.com/claude-code)
+   and open it. (It's an AI assistant that runs on your computer and can do tasks for you — like this
+   setup.)
+2. **Make a new empty folder** anywhere on your computer (call it `job-search`), and open Claude Code
+   in it — start a fresh chat there.
+3. **Paste this in and send it:**
+
+   ```
+   Clone https://github.com/Bx-Remi/claude-job-search into this folder, then read and follow
+   skills/setup/SKILL.md to set everything up with me. Explain what we're doing in plain English
+   and ask me whenever you need me to do something.
+   ```
+
+4. **Follow Claude's lead.** It walks you through the whole thing and only stops to ask when it needs
+   *you* — basically a couple of quick sign-ins to **Notion** and **Todoist** (two free apps) in your
+   browser. Everything else it handles itself.
+5. **When it's done, Claude explains how the system works**, and you can start using it — just tell it
+   things like *"I applied to Acme for a Support Lead role"* or *"prep me for my Contoso interview."*
+
+That's the whole setup. No spreadsheets, no config files to edit by hand, nothing to memorise.
+
+> Prefer to do it step-by-step yourself? The manual walkthrough is in **[SETUP.md](SETUP.md)**.
+
+---
+
 ## Why it's built this way
 
 Job hunting is an admin problem wearing a motivation costume. The hard part isn't the
@@ -49,7 +79,9 @@ Three ideas do most of the work:
 - **Gmail / Google Calendar / Google Drive** connectors. *(Optional — only `interview-prep` uses
   them, and it degrades gracefully without them.)*
 
-## Quickstart
+## Quickstart (manual path)
+
+Most people should use the one-prompt setup above. If you'd rather drive it yourself:
 
 1. Clone this repo and open it in Claude Code.
 2. Connect your Notion + Todoist connectors.

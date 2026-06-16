@@ -1,5 +1,9 @@
 # Setup — get running in about 15 minutes
 
+> **Just want it done for you?** Skip this and use the one-prompt setup in the
+> [README](README.md#get-started--one-prompt-about-15-minutes) — Claude runs the whole thing and only
+> asks when it needs you. This file is the manual walkthrough for people who'd rather drive each step.
+
 This walks you through it end-to-end. Each step is tagged **[you]** (only you can do it — usually
 because it's your account/OAuth) or **[Claude]** (let Claude do it for you in Claude Code).
 
