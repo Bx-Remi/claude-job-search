@@ -1,7 +1,7 @@
 {
   "title": "Opportunities",
   "description": "Job-search pipeline. One row per (Company + Role). The sole source of truth; Todoist holds action tasks only.",
-  "notes": "SELECT option strings are emoji-prefixed and must match EXACTLY — the skills (and the Notion API) reject unrecognised values. Build this database from this schema (have Claude do it) or duplicate the published Notion template; do not hand-type the options.",
+  "notes": "SELECT option strings are emoji-prefixed and must match EXACTLY — the skills (and the Notion API) reject unrecognised values. Build this database from this schema (have Claude do it) or duplicate the published Notion template; do not hand-type the options. Colours aren't specified here (they're cosmetic); when creating the database, pick option colours ONLY from Notion's 10-colour palette: default, gray, brown, orange, yellow, green, blue, purple, pink, red. Any other value (teal, sky, lime, etc.) makes the create call fail.",
   "properties": {
     "Company":      { "type": "title" },
     "Role":         { "type": "rich_text" },

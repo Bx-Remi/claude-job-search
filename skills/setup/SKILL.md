@@ -102,6 +102,10 @@ Do this yourself. Tell them: *"I'll now create the table that holds every role y
 - Read `notion-template/opportunities-db-schema.json` (the exact spec).
 - Ask which Notion page to put it under — or offer to create a fresh top-level page for it.
 - Create the database with the exact property names and emoji options from the schema.
+- **Select colours must come from Notion's 10-colour palette only:** `default, gray, brown, orange,
+  yellow, green, blue, purple, pink, red`. The schema doesn't specify colours, so you choose them —
+  but any value outside this list (e.g. `teal`, `sky`, `lime`) makes the create call fail. Colours
+  are cosmetic; only the option *names* must match the schema exactly.
 - Capture its **database ID** and **data-source ID** (you'll need them for the config).
 
 If creation fails because the connector can't access the chosen page, explain that they need to share
