@@ -193,7 +193,8 @@ Now — and only now — explain the system in plain English so they know what t
 - Your settings live in `config.local.md`; interview-prep docs are written to `PREP_OUTPUT_DIR`.
 
 Close with something like: *"You're all set. From here on, just tell me what happens in your search
-and I'll keep everything straight."*
+and I'll keep everything straight. Want a quick walkthrough of how to use it day-to-day and a tour of
+your 7 new views? Just say **'give me the tutorial'**."* (That runs the `tutorial` skill.)
 
 ---
 

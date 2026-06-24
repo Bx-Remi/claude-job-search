@@ -31,13 +31,21 @@ The Opportunities database now comes with **7 views**, each a different lens on 
 - Select-option **colours** are documented per option, so every copy of the database looks the same.
 - New reference docs: [`opportunities-views-spec.md`](notion-template/opportunities-views-spec.md)
   (what each view shows) and the updated schema reference.
+- New **`tutorial`** skill — a friendly, interactive walkthrough of the day-to-day flow and a guided
+  tour of the 7 views. Say *"give me the tutorial"* (offered automatically at the end of setup/upgrade).
+- New **`upgrade`** skill — a one-prompt, non-destructive migration for anyone who set up before the
+  views existed (pulls the latest, gets the template, moves existing applications across, re-points config).
 
 **If you already set up before this release**
 
-Easiest path: **duplicate the new template** ([`notion-template/README.md`](notion-template/README.md))
-and tell Claude to re-point `config.local.md` at it. If you've already logged **real** applications in
-an older database, tell Claude instead — it'll migrate them into the new database rather than starting
-fresh.
+One prompt does it — paste this to Claude:
+
+> "Update my job-search system: run `git pull` here, then read and follow `skills/upgrade/SKILL.md` —
+> walk me through it and pause whenever you need me."
+
+It pulls the latest, gives you the template to duplicate, **migrates any applications you'd already
+logged** into it, and re-points `config.local.md` — all non-destructively (it never deletes your old
+data; you remove the old database yourself once you've checked the new one).
 
 ## v1.0.0 — Initial public release
 

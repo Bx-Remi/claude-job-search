@@ -43,6 +43,7 @@ You don't need these to set up — they just document what you're duplicating:
 
 ---
 
-**Already set up before this template existed?** Same path: duplicate the template, then tell Claude to
-re-point `config.local.md` at the new database. If you've already logged **real** applications in an old
-database, tell Claude — that's a quick data migration rather than a fresh start.
+**Already set up before this template existed?** One prompt upgrades you — paste to Claude: *"Update my
+job-search system: run `git pull` here, then read and follow `skills/upgrade/SKILL.md` — walk me through
+it and pause whenever you need me."* It handles duplicating the template, migrating anything you'd
+already logged, and re-pointing your config.

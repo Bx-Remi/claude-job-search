@@ -10,9 +10,10 @@ because it's your account/OAuth) or **[Claude]** (let Claude do it for you in Cl
 > The whole philosophy is "let Claude do the work." Where a step says **[Claude]**, just ask —
 > the prompts are written out for you.
 
-> **Already set up before the 7 views existed?** Easiest is to **duplicate the new template** (Step 3)
-> and have Claude re-point your config at it. If you've already logged **real** applications, tell Claude
-> instead — that's a quick data migration rather than a fresh start. (See the [CHANGELOG](CHANGELOG.md).)
+> **Already set up before the 7 views existed?** One prompt upgrades you — paste to Claude: *"Update my
+> job-search system: run `git pull` here, then read and follow `skills/upgrade/SKILL.md` — walk me
+> through it and pause whenever you need me."* It pulls the latest, gets you the new template, and
+> migrates anything you'd already logged. (See the [CHANGELOG](CHANGELOG.md).)
 
 ---
 

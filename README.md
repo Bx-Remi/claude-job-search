@@ -42,10 +42,11 @@ That's the whole setup. No spreadsheets, no config files to edit by hand, nothin
 
 > Prefer to do it step-by-step yourself? The manual walkthrough is in **[SETUP.md](SETUP.md)**.
 
-> **Already have the repo from before the 7 views shipped?** Just **duplicate the new template**
-> ([`notion-template/README.md`](notion-template/README.md)) and have Claude re-point `config.local.md`
-> at it. (Logged real applications already? Tell Claude — it'll migrate them.) See the
-> **[CHANGELOG](CHANGELOG.md)** for what's new.
+> **Already have the repo from before the 7 views shipped?** One prompt upgrades you — paste this to
+> Claude: *"Update my job-search system: run `git pull` here, then read and follow
+> `skills/upgrade/SKILL.md` — walk me through it and pause whenever you need me."* It pulls the latest,
+> gets you the new template, and migrates anything you'd already logged. See the
+> **[CHANGELOG](CHANGELOG.md)**.
 
 ---
 
@@ -76,6 +77,8 @@ Three ideas do most of the work:
 |---|---|
 | **`skills/job-search-action`** | Logs every pipeline event from one sentence — applied, heard back, interview, rejected, ghosted, offer — into Notion + Todoist. |
 | **`skills/interview-prep`** | Scaffolds a first-round prep doc: pulls the role, the recruiter thread, your CV and a web snapshot into one brief, plus a glance-page in Notion. |
+| **`skills/tutorial`** | A friendly walkthrough of the day-to-day flow **+ a guided tour of your 7 Notion views**. Just say *"give me the tutorial"*. |
+| **`skills/upgrade`** | One prompt for people who set up before the views existed — pulls the latest, gets you the template, and migrates anything you'd already logged. |
 | **`notion-template/`** | The Opportunities database **+ its 7 views** (today's actions, stale follow-ups, an interview board, an archive, and more) — the backbone. You duplicate a ready-made template and Claude wires it up. |
 | **`templates/star-story-template.md`** | A STAR-story bank template so you stop improvising the same behavioural answers badly. |
 | **`config.example.md`** | Where you put your own IDs. Copy to `config.local.md` (gitignored) — nothing personal is committed. |
