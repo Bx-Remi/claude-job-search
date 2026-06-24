@@ -1,25 +1,72 @@
 {
   "title": "Opportunities",
   "description": "Job-search pipeline. One row per (Company + Role). The sole source of truth; Todoist holds action tasks only.",
-  "notes": "SELECT option strings are emoji-prefixed and must match EXACTLY — the skills (and the Notion API) reject unrecognised values. Build this database from this schema (have Claude do it) or duplicate the published Notion template; do not hand-type the options. Colours aren't specified here (they're cosmetic); when creating the database, pick option colours ONLY from Notion's 10-colour palette: default, gray, brown, orange, yellow, green, blue, purple, pink, red. Any other value (teal, sky, lime, etc.) makes the create call fail.",
+  "notes": "Reference for the Opportunities database that the published template duplicates — you do NOT build this by hand; you duplicate the template (see README.md). SELECT option strings are emoji-prefixed and must match EXACTLY — the skills reject unrecognised values. Each option lists its colour. The database also ships with 7 views (see opportunities-views-spec.md).",
   "properties": {
     "Company":      { "type": "title" },
     "Role":         { "type": "rich_text" },
-    "Status":       { "type": "select", "options": ["🔍 Sourcing", "📨 Applied", "📞 Recruiter screen", "👤 Hiring manager", "📝 Take-home", "🎯 Final stage", "💌 Offer", "🎉 Offer accepted", "⚰️ Dead"] },
-    "Excitement":   { "type": "select", "options": ["5 ⭐⭐⭐⭐⭐", "4 ⭐⭐⭐⭐", "3 ⭐⭐⭐", "2 ⭐⭐", "1 ⭐"] },
-    "Track":        { "type": "select", "options": ["🅰️ A", "🅱️ B"] },
-    "Temperature":  { "type": "select", "options": ["🔥 Hot", "☀️ Warm", "❄️ Cool"] },
-    "Source":       { "type": "select", "options": ["LinkedIn", "Reed", "Adzuna", "Otta", "Referral", "Direct", "Other"] },
+    "Status":       { "type": "select", "options": [
+      { "name": "🔍 Sourcing", "color": "gray" },
+      { "name": "📨 Applied", "color": "blue" },
+      { "name": "📞 Recruiter screen", "color": "yellow" },
+      { "name": "👤 Hiring manager", "color": "orange" },
+      { "name": "📝 Take-home", "color": "purple" },
+      { "name": "🎯 Final stage", "color": "pink" },
+      { "name": "💌 Offer", "color": "green" },
+      { "name": "🎉 Offer accepted", "color": "brown" },
+      { "name": "⚰️ Dead", "color": "red" }
+    ] },
+    "Excitement":   { "type": "select", "options": [
+      { "name": "5 ⭐⭐⭐⭐⭐", "color": "red" },
+      { "name": "4 ⭐⭐⭐⭐", "color": "orange" },
+      { "name": "3 ⭐⭐⭐", "color": "yellow" },
+      { "name": "2 ⭐⭐", "color": "gray" },
+      { "name": "1 ⭐", "color": "default" }
+    ] },
+    "Track":        { "type": "select", "options": [
+      { "name": "🅰️ A", "color": "pink" },
+      { "name": "🅱️ B", "color": "blue" }
+    ] },
+    "Temperature":  { "type": "select", "options": [
+      { "name": "🔥 Hot", "color": "red" },
+      { "name": "☀️ Warm", "color": "yellow" },
+      { "name": "❄️ Cool", "color": "blue" }
+    ] },
+    "Source":       { "type": "select", "options": [
+      { "name": "LinkedIn", "color": "blue" },
+      { "name": "Reed", "color": "orange" },
+      { "name": "Adzuna", "color": "purple" },
+      { "name": "Otta", "color": "pink" },
+      { "name": "Referral", "color": "green" },
+      { "name": "Direct", "color": "gray" },
+      { "name": "Other", "color": "default" }
+    ] },
     "Link":         { "type": "url" },
     "Salary range": { "type": "rich_text" },
-    "Work model":   { "type": "select", "options": ["🏠 Remote", "🔀 Hybrid 1d", "🔀 Hybrid 2d", "🔀 Hybrid 3d", "🔀 Hybrid 4d", "🔀 Hybrid TBD", "🏢 Onsite"] },
+    "Work model":   { "type": "select", "options": [
+      { "name": "🏠 Remote", "color": "green" },
+      { "name": "🔀 Hybrid 1d", "color": "green" },
+      { "name": "🔀 Hybrid 2d", "color": "yellow" },
+      { "name": "🔀 Hybrid 3d", "color": "orange" },
+      { "name": "🔀 Hybrid 4d", "color": "red" },
+      { "name": "🔀 Hybrid TBD", "color": "gray" },
+      { "name": "🏢 Onsite", "color": "red" }
+    ] },
     "Location":     { "type": "rich_text" },
     "Applied date": { "type": "date" },
     "Last contact": { "type": "date" },
     "Next action":  { "type": "rich_text" },
     "Next action date": { "type": "date" },
     "Days since last contact": { "type": "formula", "expression": "dateBetween(now(), prop(\"Last contact\"), \"days\")" },
-    "Dead reason":  { "type": "select", "options": ["Rejected", "Ghosted", "Withdrew", "Role closed", "Not a fit", "Other"] },
+    "Days since applied": { "type": "formula", "expression": "dateBetween(now(), prop(\"Applied date\"), \"days\")" },
+    "Dead reason":  { "type": "select", "options": [
+      { "name": "Rejected", "color": "red" },
+      { "name": "Ghosted", "color": "purple" },
+      { "name": "Withdrew", "color": "gray" },
+      { "name": "Role closed", "color": "brown" },
+      { "name": "Not a fit", "color": "orange" },
+      { "name": "Other", "color": "default" }
+    ] },
     "Notes":        { "type": "rich_text" }
   }
 }

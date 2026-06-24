@@ -3,10 +3,16 @@
 Copy this file to **`config.local.md`** and fill in **your own** IDs.
 `config.local.md` is gitignored, so your IDs never get committed.
 
-**How to find each ID:** the easiest way is to ask Claude once your connectors are wired
-(see [SETUP.md](SETUP.md)) — e.g. *"what's the ID of my Notion Opportunities database?"* or
-*"what's my Todoist 'Job Search' project ID?"*. You can also read most IDs out of the URL in
-Notion / Todoist.
+**The easy way — let Claude fill this in.** Once your connectors are wired (see [SETUP.md](SETUP.md)),
+copy this file to `config.local.md`, then paste the prompt below to Claude, filling in the
+**[bracketed]** names. Claude finds every ID through the connectors and writes them into the file — you
+never read IDs out of a URL or paste them yourself.
+
+> "Fill in `config.local.md` for me. My Notion job-search database is called **Opportunities** (under
+> the page **[your Notion page name]**), and my Todoist project is **[🔍 Job Search]**. Find their IDs
+> — the Notion database ID and data-source ID, and the Todoist project ID — and write them into the
+> file. If I've connected Google Drive, also find my master CV **[your CV file name]** and add its ID.
+> Set USER_NAME to **[your first name]**. Ask me for anything you can't find."
 
 Both skills resolve every `{{PLACEHOLDER}}` from this file. If a required value is missing,
 the skill stops and asks you to finish setup — it will **not** run with empty IDs.

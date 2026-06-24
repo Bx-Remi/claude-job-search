@@ -17,7 +17,7 @@ metadata:
 ## Configuration (read this first)
 All IDs, project names, and paths below are placeholders of the form `{{PLACEHOLDER}}`. Before doing anything, read `config.local.md` at the repo root and resolve every placeholder to the user's real value. If `config.local.md` is missing or a required value is blank, STOP and tell the user to complete `SETUP.md` first — never proceed with empty IDs. Optional values (e.g. `{{TODOIST_SYSTEM_SECTION}}`) may be blank; skip those steps gracefully.
 
-# Job Search Action Skill (v5.0.0 — Notion sole source-of-truth + 18-property schema + read-merge-write pattern + Excitement/Track/Temperature as Notion SELECTs)
+# Job Search Action Skill (v5.0.0 — Notion sole source-of-truth + 19-property schema + read-merge-write pattern + Excitement/Track/Temperature as Notion SELECTs)
 
 You are the single entry point for all job search pipeline changes. When the user tells you something happened with a job application, you update both systems (Notion DB + Todoist) so they never have to touch either manually.
 
@@ -37,7 +37,7 @@ Data source ID:      {{NOTION_OPPORTUNITIES_DS}}
 Parent page:         {{NOTION_PARENT_PAGE}}
 ```
 
-The DB has 19 properties (18 functional + `Days since last contact` formula). See the "Notion property reference" section below.
+The DB has 19 properties (17 functional + 2 read-only formula columns: `Days since last contact` and `Days since applied`). See the "Notion property reference" section below.
 
 **Todoist** — the action layer. One task per active application. Tasks live in project "🔍 Job Search" (ID: `{{TODOIST_PROJECT}}`).
 
@@ -78,10 +78,13 @@ The Opportunities DB has 19 properties. **Always write the exact emoji-prefixed 
 | Next action | RICH_TEXT | `"Follow up if no response"` |
 | Next action date | DATE | same expanded form |
 | Days since last contact | FORMULA (read-only) | auto: `dateBetween(now(), prop("Last contact"), "days")` |
+| Days since applied | FORMULA (read-only) | auto: `dateBetween(now(), prop("Applied date"), "days")` |
 | Dead reason | SELECT | `"Rejected"` / `"Ghosted"` / `"Withdrew"` / `"Role closed"` / `"Not a fit"` / `"Other"` |
 | Notes | RICH_TEXT | free-form |
 
 **Page body convention:** every new row's page body includes a `## Job Description` heading with the JD pasted underneath. The user can convert to a toggle in UI if desired.
+
+**Views are display-only.** The DB ships with 7 views (🎯 Today, ⏰ Stale follow-ups, 🔥 Active pipeline, 📞 Interviewing, 🔍 Sourcing, ⚰️ Archive, 🗂 All — see `notion-template/opportunities-views-spec.md`). You never write to a view: write properties on the row and every view re-filters automatically. Don't try to create or modify views as part of logging an event.
 
 ## Track A vs Track B
 

@@ -10,6 +10,10 @@ because it's your account/OAuth) or **[Claude]** (let Claude do it for you in Cl
 > The whole philosophy is "let Claude do the work." Where a step says **[Claude]**, just ask —
 > the prompts are written out for you.
 
+> **Already set up before the 7 views existed?** Easiest is to **duplicate the new template** (Step 3)
+> and have Claude re-point your config at it. If you've already logged **real** applications, tell Claude
+> instead — that's a quick data migration rather than a fresh start. (See the [CHANGELOG](CHANGELOG.md).)
+
 ---
 
 ## Step 0 — Prerequisites **[you]**
@@ -42,23 +46,31 @@ The OAuth handshake happens in **your** browser — Claude can't log into your a
 > `add-tasks`). If Claude ever says it can't find a tool, the connector probably isn't connected
 > yet — reconnect and retry.
 
-## Step 3 — Create your Notion database **[Claude]**
+## Step 3 — Get your Notion database (duplicate the template) **[you, 2 clicks + Claude]**
 
-Pick a Notion page to hold it, then ask Claude:
+The database, its 7 views (🎯 Today, ⏰ Stale follow-ups, 🔥 Active pipeline, 📞 Interviewing,
+🔍 Sourcing, ⚰️ Archive, 🗂 All), and the formulas all come ready-made. You duplicate them; Claude
+connects them.
 
-> "Read `notion-template/opportunities-db-schema.json` and create this database under
-> *[page name]*. Then tell me its database ID and data-source ID."
+1. Open the template:
+   **https://thin-goat-86e.notion.site/Opportunities-Shareable-Template-388f26eedb6a8021a6d4db8f4fa3312f**
+2. Click **Duplicate** (top-right) and pick your own workspace.
+3. Tell Claude:
 
-Claude builds it with the exact properties and emoji options. *(Prefer to click? See the
-duplicate-a-template path in [`notion-template/README.md`](notion-template/README.md).)*
+> "I duplicated the Opportunities template into my Notion. Find my Opportunities database and write its
+> database ID and data-source ID into `config.local.md`."
+
+Claude finds your copy and wires it up — it'll ask which page if you have more than one "Opportunities".
+The sample rows are fake; delete them whenever you like. More detail (and what to do if Claude can't
+find it) is in [`notion-template/README.md`](notion-template/README.md).
 
 ## Step 4 — Create your Todoist project **[you, 30s — or Claude]**
 
-Make a Todoist project (e.g. "🔍 Job Search"). Then ask:
+Make a Todoist project (e.g. "🔍 Job Search") — or ask Claude to make it:
 
-> "What's the ID of my Job Search project in Todoist?"
+> "Create a Todoist project called '🔍 Job Search'."
 
-Claude reads it back via the connector.
+You don't need to copy its ID; the next step wires it into your config for you.
 
 ## Step 5 — Fill in your config **[you + Claude]**
 
@@ -66,14 +78,16 @@ Claude reads it back via the connector.
 cp config.example.md config.local.md
 ```
 
-Then ask Claude:
+Then paste this to Claude, filling in the **[bracketed]** names:
 
-> "Fill in `config.local.md` — find my Notion Opportunities database ID and data-source ID, my
-> Todoist Job Search project ID, and (if connected) my Drive master-CV ID. Ask me for anything
+> "Fill in `config.local.md` for me. My Notion database is **Opportunities** (under the page **[your
+> page name]**) and my Todoist project is **[🔍 Job Search]**. Find their IDs — the Notion database ID
+> and data-source ID, and the Todoist project ID — and write them in. If Google Drive is connected, add
+> my master CV **[your CV file name]** too. Set USER_NAME to **[your first name]**. Ask me for anything
 > you can't find."
 
-Claude resolves what it can through the connectors and asks you for the rest. Set `USER_NAME` and
-leave the optional values blank if you're not using them.
+Claude finds every ID through the connectors and writes them into the file — you don't hand-edit IDs or
+copy them out of URLs. Leave optional values blank if you're not using them.
 
 > `config.local.md` is gitignored — your IDs stay on your machine.
 
@@ -116,7 +130,7 @@ The skills trigger on the natural phrasing — no commands to memorise.
 |---|---|
 | Install Claude Code, create Notion/Todoist accounts | **You** |
 | Connect each MCP connector (OAuth) | **You** (browser) |
-| Build the Notion database | **Claude** (or duplicate a template) |
+| Get the Notion database (duplicate the template) | **You** (2 clicks) + **Claude** wires it up |
 | Create the Todoist project | **You** (or Claude) |
 | Find IDs, fill `config.local.md` | **Claude** (asks you for gaps) |
 | Write your STAR stories | **You** (Claude drafts) |

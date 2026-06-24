@@ -42,6 +42,11 @@ That's the whole setup. No spreadsheets, no config files to edit by hand, nothin
 
 > Prefer to do it step-by-step yourself? The manual walkthrough is in **[SETUP.md](SETUP.md)**.
 
+> **Already have the repo from before the 7 views shipped?** Just **duplicate the new template**
+> ([`notion-template/README.md`](notion-template/README.md)) and have Claude re-point `config.local.md`
+> at it. (Logged real applications already? Tell Claude — it'll migrate them.) See the
+> **[CHANGELOG](CHANGELOG.md)** for what's new.
+
 ---
 
 ## Why it's built this way
@@ -53,9 +58,11 @@ goal was simple: **kill the friction between "I should do the thing" and "the th
 
 Three ideas do most of the work:
 
-- **One source of truth.** Every role is one row in a Notion database — stage, excitement, *next
-  action*, days since last contact. Todoist holds only the *actions* (with due dates); Notion
-  holds the *state*. They never drift because you never touch them by hand — Claude does.
+- **One source of truth, many lenses.** Every role is one row in a Notion database — stage,
+  excitement, *next action*, days since last contact — sliced by **7 ready-made views** (what's due
+  today, what's gone stale, your interview board, the archive, and more). Todoist holds only the
+  *actions* (with due dates); Notion holds the *state*. They never drift because you never touch them
+  by hand — Claude does.
 - **Two tracks.** **Track A** = a handful of roles you genuinely want, tailored hard (≈45 min
   each). **Track B** = high-volume quick-applies for income insurance (≈5 min each). Different
   effort, different cadence — logged the same way.
@@ -69,7 +76,7 @@ Three ideas do most of the work:
 |---|---|
 | **`skills/job-search-action`** | Logs every pipeline event from one sentence — applied, heard back, interview, rejected, ghosted, offer — into Notion + Todoist. |
 | **`skills/interview-prep`** | Scaffolds a first-round prep doc: pulls the role, the recruiter thread, your CV and a web snapshot into one brief, plus a glance-page in Notion. |
-| **`notion-template/`** | The Opportunities database — the backbone. Build it from the schema (Claude does it) or duplicate a template. |
+| **`notion-template/`** | The Opportunities database **+ its 7 views** (today's actions, stale follow-ups, an interview board, an archive, and more) — the backbone. You duplicate a ready-made template and Claude wires it up. |
 | **`templates/star-story-template.md`** | A STAR-story bank template so you stop improvising the same behavioural answers badly. |
 | **`config.example.md`** | Where you put your own IDs. Copy to `config.local.md` (gitignored) — nothing personal is committed. |
 
@@ -86,8 +93,11 @@ Most people should use the one-prompt setup above. If you'd rather drive it your
 
 1. Clone this repo and open it in Claude Code.
 2. Connect your Notion + Todoist connectors.
-3. Build the Notion database (ask Claude to build it from `notion-template/opportunities-db-schema.json`).
-4. `cp config.example.md config.local.md` and let Claude fill in your IDs.
+3. Get the Notion database — **duplicate the ready-made template** (all 7 views + sample data) from
+   [`notion-template/README.md`](notion-template/README.md), then tell Claude: *"I duplicated the
+   Opportunities template — find it and write its IDs into config.local.md."*
+4. `cp config.example.md config.local.md` and let Claude fill in the rest of your IDs (it finds them and
+   writes the file — see the prompt in `config.example.md`).
 5. Try it: *"I applied to Acme Corp for a Support Lead role — quick apply."*
 
 Full step-by-step, including which steps Claude can do for you, is in **[SETUP.md](SETUP.md)**.

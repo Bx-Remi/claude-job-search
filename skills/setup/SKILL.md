@@ -9,7 +9,7 @@ description: >
   and pausing only when it genuinely needs the user (account sign-ins, OAuth, a name, story content).
   Written for people who have never heard of MCP, OAuth, or Claude Code internals.
 metadata:
-  version: "1.0.0"
+  version: "1.1.0"
 ---
 
 # Setup wizard
@@ -43,7 +43,7 @@ require them.
   Model Context Protocol, the open standard these bridges use — only mention that if they ask.)
 - **Notion** — a flexible notes-and-tables app; we use it as the tracker that holds every role.
 - **Todoist** — a to-do app; it holds your follow-up reminders with due dates.
-- **Database / data-source ID** — just the address of the table we create, so I know where to write.
+- **Database / data-source ID** — just the address of your tracker table, so I know where to write.
 
 ---
 
@@ -110,20 +110,32 @@ If a call fails with "tool not found" or similar, the connector isn't actually c
 them plainly and have them redo the connect step (and, if needed, fully reopen Claude Code so the new
 connector loads). **Do not proceed to Phase 3 until both required connectors respond.**
 
-## Phase 3 — Build the Notion tracker
+## Phase 3 — Get the Notion tracker (duplicate the template)
 
-Do this yourself. Tell them: *"I'll now create the table that holds every role you track."*
-- Read `notion-template/opportunities-db-schema.json` (the exact spec).
-- Ask which Notion page to put it under — or offer to create a fresh top-level page for it.
-- Create the database with the exact property names and emoji options from the schema.
-- **Select colours must come from Notion's 10-colour palette only:** `default, gray, brown, orange,
-  yellow, green, blue, purple, pink, red`. The schema doesn't specify colours, so you choose them —
-  but any value outside this list (e.g. `teal`, `sky`, `lime`) makes the create call fail. Colours
-  are cosmetic; only the option *names* must match the schema exactly.
-- Capture its **database ID** and **data-source ID** (you'll need them for the config).
+The whole tracker — the Opportunities database, its 7 views, and the formulas — comes ready-made.
+**You do not build it from a schema or create views by hand.** The user duplicates a published template
+in two clicks, and you find it and wire it up. (Duplication is the only supported way: it's also the
+only way to get the two rolling-date views, whose filters can't be set through the Notion API.)
 
-If creation fails because the connector can't access the chosen page, explain that they need to share
-that page with the Notion connection (in Notion: the page's "•••" menu → Connections → add it), then retry.
+Tell them: *"I'll give you a ready-made job tracker — one table with 7 views and a few sample rows.
+You'll copy it into your Notion in two clicks, then I'll find it and connect it for you."*
+
+1. **Give them the link and the two clicks. Wait for them to confirm.**
+   - Open: **https://thin-goat-86e.notion.site/Opportunities-Shareable-Template-388f26eedb6a8021a6d4db8f4fa3312f**
+   - Click **Duplicate** (top-right) → choose their own workspace.
+2. **Find their copy.** Use `notion-search` for "Opportunities" to locate the duplicated database, then
+   `notion-fetch` it to read the **database ID** and **data-source ID**. If several match (or none),
+   ask which page they duplicated it under, or have them paste the database's URL.
+3. **If you can't see it:** the connector likely lacks access to the new page. Tell them to open the
+   duplicated page → "•••" menu → **Connections** → add their Notion connection, then search again.
+4. **Capture** the database ID and data-source ID (you need them for the config in Phase 5).
+5. The sample rows are fictional — tell them they can delete them whenever they like (keep them while
+   they learn the views, then clear them).
+
+Do **not** fall back to building the database from `opportunities-db-schema.json` or creating views with
+`notion-create-view` — the template already has the exact schema, colours, both formulas, and all 7
+views (including the rolling-date filters). If duplication is failing, fix the duplication (usually
+connector access), don't rebuild by hand.
 
 ## Phase 4 — Create the Todoist project
 
@@ -189,8 +201,12 @@ and I'll keep everything straight."*
 
 - **"Tool not found" / I can't see Notion or Todoist** → the connector isn't connected. Go back to
   Phase 2, connect it, and reopen Claude Code if it still doesn't appear.
-- **Notion database won't create** → the connection can't access the target page. Share the page with
-  the Notion connection (page "•••" → Connections), then retry.
+- **Can't find the duplicated database** → make sure they actually clicked **Duplicate** on the
+  template (not just viewed it), and that the connector can access the new page (page "•••" →
+  Connections → add the connection), then search again. Don't build the database by hand as a fallback.
 - **A skill says config values are missing** → finish Phase 5; the skills refuse to run on empty IDs.
+- **A view looks wrong or is missing** → the template carries all 7 views (including the rolling-date
+  filters) — if any are absent, the duplicate didn't complete; re-duplicate from
+  `notion-template/README.md`. There's nothing to build by hand.
 - **Don't:** ask the user to edit JSON or markdown by hand, dump all phases at once, proceed past
   Phase 2 before a connector call succeeds, or invent IDs.

@@ -4,16 +4,16 @@ This is the backbone of the system: **one Notion database, one row per (Company 
 the single source of truth for your pipeline. Todoist holds the *action* tasks; Notion holds
 the *state*.
 
-You don't have to build this by hand — see [the two setup paths](README.md). This page is the
-human-readable reference; [`opportunities-db-schema.json`](opportunities-db-schema.json) is the
-machine-readable version Claude can build the database from.
+You don't build this by hand — you [duplicate the ready-made template](README.md), which has all of
+this plus the 7 views. This page is the human-readable reference for what that template contains;
+[`opportunities-db-schema.json`](opportunities-db-schema.json) is the machine-readable version.
 
 > ⚠️ **The SELECT option strings are emoji-prefixed and matched exactly.** The skills write
 > values like `"📨 Applied"` (not `"Applied"`); a mismatch makes the Notion API reject the
-> write. This is why you should let Claude build the DB from the JSON, or duplicate the
-> published template — don't hand-type the options.
+> write. This is why you duplicate the published template instead of hand-building the database or
+> hand-typing the options.
 
-## Properties (17 editable + 1 formula)
+## Properties (17 editable + 2 formulas)
 
 | Property | Type | Options / notes |
 |---|---|---|
@@ -33,6 +33,7 @@ machine-readable version Claude can build the database from.
 | **Next action** | Text | The single next thing to do. |
 | **Next action date** | Date | When to do it. |
 | **Days since last contact** | Formula | `dateBetween(now(), prop("Last contact"), "days")` — read-only; powers stale-lead nudges. |
+| **Days since applied** | Formula | `dateBetween(now(), prop("Applied date"), "days")` — read-only; how long since you applied. |
 | **Dead reason** | Select | `Rejected` · `Ghosted` · `Withdrew` · `Role closed` · `Not a fit` · `Other` |
 | **Notes** | Text | Free-form running narrative. |
 
@@ -52,3 +53,11 @@ hot right now" without losing sight of "what I actually want".
 
 Each row's page body starts with a `## Job Description` heading and the JD pasted underneath —
 so the full posting travels with the row even if the original link rots.
+
+## Views
+
+The properties above are only half the system — the database ships with **7 views** (🎯 Today,
+⏰ Stale follow-ups, 🔥 Active pipeline, 📞 Interviewing, 🔍 Sourcing, ⚰️ Archive, 🗂 All), each a
+different lens on the same pipeline. They're documented in
+[`opportunities-views-spec.md`](opportunities-views-spec.md) and come with the template you duplicate.
+Select-option **colours** are specified per option above, so every copy of the database looks the same.
